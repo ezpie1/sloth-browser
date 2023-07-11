@@ -1,0 +1,8 @@
+# environment
+env
+
+# python vscode extension generated files
+__pycache__
+
+# versions
+versions
