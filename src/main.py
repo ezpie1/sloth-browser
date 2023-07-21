@@ -1,43 +1,48 @@
+"""
+The is the main file that imports the MainWindow Class and creates the browser
+window.
+"""
+
 import sys
 
-from mainWindow import MainWindow
 from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QApplication
+from mainWindow import MainWindow
 
-if __name__ == '__main__':
-    app = QApplication(sys.argv)
-    app.setApplicationName("Sloth")
-    app.setWindowIcon(QIcon("assets/logo/icon.png"))
+if __name__ == "__main__":
+  app = QApplication(sys.argv)
+  app.setApplicationName("Sloth")
+  app.setWindowIcon(QIcon("assets/logo/icon.png"))
 
-    window = MainWindow()
-    
-    app.setStyleSheet("""
-    QWidget#SideBar {
-        background-color: #808080;
-    }
+  window = MainWindow()
 
-    QToolBar {
-        background-color: #808080;
-    }
+  app.setStyleSheet("""
+  QWidget#SideBar {
+    background-color: #808080;
+  }
 
-    QListView {
+  QToolBar {
+    background-color: #808080;
+  }
+
+  QListView {
     background-color: #808080;
     color: #ffffff;
     font-size: 20px;
-    }
+  }
 
-    QToolButton {
+  QToolButton {
     background-color: transparent;
-    }
+  }
+  
+  QLineEdit {
+    height: 25px;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  """)
 
-    QLineEdit {
-        height: 25px;
-        border-radius: 10px;
-        padding-left: 10px;
-        padding-right: 10px;
-        margin-left: 20px;
-        margin-right: 20px;
-    }
-    """)
-
-    sys.exit(app.exec_())
+  sys.exit(app.exec_())
