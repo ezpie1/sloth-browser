@@ -100,6 +100,7 @@ class MainWindow(QMainWindow):
     self.history_widget.setModel(self.history_model)
     self.history_widget.setEditTriggers(QAbstractItemView.NoEditTriggers)
     self.history_widget.doubleClicked.connect(self.LoadHistoryItem)
+    self.history_widget.clicked.connect(self.LoadHistoryItem)
     self.history_widget.hide()
 
     self.history_dock = QDockWidget("History", self)
@@ -108,6 +109,7 @@ class MainWindow(QMainWindow):
     self.history_dock.setWidget(self.history_widget)
     self.addDockWidget(Qt.LeftDockWidgetArea, self.history_dock)
     self.history_dock.hide()
+
 
   def SideBar(self):
     """This method create's the sidebar widget"""
@@ -206,8 +208,11 @@ class MainWindow(QMainWindow):
                                  browser=browser: self.OnPageLoadFinished
                                  (i, browser, label))
 
-  def OnPageLoadFinished(self, index, browser):
+  # The label argument is auto assigned and used
+  # pylint: disable=unused-argument
+  def OnPageLoadFinished(self, index, browser, label):
     """ This method is used to update the history attribute"""
+
     # Update the tab title and add the page to the history
     self.tabs.setTabText(index, browser.page().title())
     self.history.append({'title': browser.page().title(),
@@ -357,11 +362,15 @@ class MainWindow(QMainWindow):
       self.history_model.appendRow(history_item)
 
   def LoadHistoryItem(self, index):
-    """ This method is used to add a new tab with the history item selected."""
+    """This method is used to add a new tab with the history item selected."""
 
-    # Load the selected history item in a new tab
-    item = self.history_model.itemData(index, Qt.UserRole)
-    if item:
-      url = item[0]
-      self.AddNewTab(QUrl(url), self.history_model.item(index).text())
+    # Get the index of the clicked item
+    selected_index = index.row()
+
+    # Retrieve the data associated with the item using its index
+    item = self.history_model.item(selected_index)
+
+    if item is not None:
+      url = item.data(Qt.UserRole)
+      self.AddNewTab(QUrl(url), item.text())
       self.ShowHistory()
