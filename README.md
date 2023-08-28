@@ -8,7 +8,7 @@ This repository consist's of the code written to make the sloth browser.
 
 As of now the sloth browser is not much stable and is still under development(like any other projects of mine).
 
-You can still install the alpha version from [our site](https://sloth-browser.versel.app).
+You can still install the beta version from [our site](https://sloth-browser.vercel.app).
 
 ## Contribution
 
